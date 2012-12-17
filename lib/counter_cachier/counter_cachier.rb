@@ -2,11 +2,11 @@ module CounterCachier
   class << self
 
     def redis=(r)
-      @redis = r || $redis
+      @redis = r
     end
 
     def redis
-      @redis
+      @redis ||= $redis
     end
 
     def key(object, name)
