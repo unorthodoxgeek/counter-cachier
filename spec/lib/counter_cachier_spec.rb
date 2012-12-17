@@ -7,7 +7,7 @@ describe CounterCachier do
   let(:cachier){double(name: "foo")}
 
   before :each do
-    Redis.stub!(:new).and_return(double)
+    CounterCachier.redis = double
   end
   
   describe :write do
