@@ -5,8 +5,12 @@ class Dummy
     4
   end
 
-  counter_cachier :foo do |foo|
+  def baz
     10
+  end
+
+  counter_cachier :foo do |foo|
+    foo.baz
   end
 end
 
@@ -36,7 +40,7 @@ describe CounterCachier::Mounter do
     end
 
     it "should run the block when calling recalc_foo" do
-      CounterCachier.redis.should_receive :write
+      CounterCachier.redis.should_receive :set
       dummy.recalc_foo.should == 10
     end
   end

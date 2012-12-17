@@ -9,7 +9,7 @@ module CounterCachier
     end
 
     def read(object, cachier)
-      value = redis.read(key(object, cachier.name))
+      value = redis.get(key(object, cachier.name))
       if value.nil?
         value = cachier.write(object)
       end
@@ -17,7 +17,7 @@ module CounterCachier
     end
 
     def write(object, name, value)
-      redis.write key(object, name), value
+      redis.set key(object, name), value
     end
   end
 
