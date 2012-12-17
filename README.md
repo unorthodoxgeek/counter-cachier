@@ -12,19 +12,19 @@ usage is pretty simple, simply include CounterCachier in the class you wish to u
 class User
   include CounterCachier
 
-  counter_cachier :count_approved_posts do |user|
+  counter_cachier :approved_posts_count do |user|
     user.posts.approved.count
   end
 end
 ```
 
-the block's argument is the object you're making the calculations for (i.e. an instance of User), the value returned in the block will be the new counter. From this moment, two new methods are added to User - count_approved_posts and recalc_count_approved_posts.
+the block's argument is the object you're making the calculations for (i.e. an instance of User), the value returned in the block will be the new counter. From this moment, two new methods are added to User - approved_posts_count and recalc_approved_posts_count.
 
 ```ruby
 user = User.first
-user.count_approved_posts #=> 10
+user.approved_posts_count #=> 10
 #...user adds an approved post...
-user.recalc_count_approved_posts #=> 11, but it actually recalculates and pushes the number into redis.
+user.recalc_approved_posts_count #=> 11, but it actually recalculates and pushes the number into redis.
 ```
 
 installation
