@@ -16,7 +16,7 @@ module CounterCachier
       cachier = @cachier
 
       @klass.send :define_method, @name do
-        CounterCachier.read(self, name)
+        CounterCachier.read(self, cachier)
       end
 
       @klass.send :define_method, "recalc_#{@name}" do

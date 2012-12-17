@@ -43,5 +43,15 @@ describe CounterCachier::Mounter do
       CounterCachier.redis.should_receive :set
       dummy.recalc_foo.should == 10
     end
+
+    it "should properly read the object" do
+      CounterCachier.redis.should_receive(:get).and_return(4)
+      dummy.foo.should == 4
+    end
+
+    it "should properly read the object" do
+      CounterCachier.should_receive(:read).with(dummy, Dummy.cachiers[:foo].cachier)
+      dummy.foo
+    end
   end
 end
