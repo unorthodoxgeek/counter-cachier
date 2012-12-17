@@ -20,4 +20,21 @@ module CounterCachier
       redis.write key(object, name), value
     end
   end
+
+  def self.included(base)
+    base.extend ClassMethods
+    class << base
+      attr_accessor :cachiers
+    end
+  end
+
+  module ClassMethods
+    def counter_cachier(name, options = {}, &block)
+      self.cachiers ||= {}
+      self.cachiers[name] = Mounter.new(self, name, &block)
+      if options[:async]
+        later "recalc_#{name}", queue: options[:queue] || :long
+      end
+    end
+  end
 end

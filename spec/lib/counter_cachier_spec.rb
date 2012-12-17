@@ -12,9 +12,8 @@ describe CounterCachier do
   
   describe :write do
     it "should write the new counter cache" do
-    end
-
-    it "should override the existing counter cache" do
+      CounterCachier.redis.should_receive(:write)
+      CounterCachier.write(a, :b, 4)
     end
   end
 

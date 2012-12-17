@@ -13,7 +13,7 @@ module CounterCachier
 
     def write(object)
       new_value = recalc(object)
-      CounterCachier.write(object, new_value)
+      CounterCachier.write(object, name, new_value)
       new_value
     end
   end
