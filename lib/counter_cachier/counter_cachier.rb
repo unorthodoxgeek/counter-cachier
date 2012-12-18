@@ -18,7 +18,7 @@ module CounterCachier
       if value.nil?
         value = cachier.write(object)
       end
-      value
+      value.to_i
     end
 
     def write(object, name, value)
